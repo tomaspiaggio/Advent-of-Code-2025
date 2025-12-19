@@ -1,4 +1,3 @@
-use std::cmp::{max, min};
 use std::fs;
 
 fn mock_data() -> String {
@@ -19,11 +18,11 @@ fn mock_data() -> String {
 fn data() -> String {
     let result = fs::read_to_string("./data/day4/part1.txt")
         .expect("file not found");
-    
+
     result
 }
 
-fn is_location_available(matrix: &Vec<Vec<String>>, row: i32, col: i32) -> bool {
+pub(crate) fn is_location_available(matrix: &Vec<Vec<String>>, row: i32, col: i32) -> bool {
     if matrix[row as usize][col as usize] != "@" {
         return false;
     }
@@ -69,8 +68,8 @@ fn process(matrix: Vec<Vec<String>>) -> i32 {
     sum
 }
 
-pub fn run() -> i32 {
-    let input = data()
+pub(crate) fn make_matrix() -> Vec<Vec<String>> {
+    data()
         .split("\n")
         .filter(|x| *x != "")
         .map(|x| {
@@ -78,7 +77,11 @@ pub fn run() -> i32 {
                 .filter(|x| *x != "")
                 .map(|x| String::from(x))
                 .collect::<Vec<String>>()
-        }).collect::<Vec<Vec<String>>>();
+        }).collect::<Vec<Vec<String>>>()
+}
+
+pub fn run() -> i32 {
+    let input = make_matrix();
 
     let result = process(input);
     println!("Result: {}", result);
