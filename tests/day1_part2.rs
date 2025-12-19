@@ -1,4 +1,4 @@
-// Integration tests for day1::part1
+// Integration tests for day1::part1.txt
 // These tests import the library crate and test its public API
 
 #[cfg(test)]
